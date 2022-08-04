@@ -3,8 +3,10 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const PORT = process.env.PORT || 7000;
+let roomId = '';
 
 app.get('/',function(req,res){
+    roomId = req.query.c;
     res.sendFile(__dirname + '/index.html');
 });
 
@@ -13,7 +15,9 @@ http.listen(PORT,function(){
 });
 
 io.on('connection',function(socket){
-    let roomId = '';
+    if(roomId !== ''){
+        socket.join(roomId);
+    }
     socket.on('message',function(msg){
         console.log('message:'+msg);
         console.log('id:'+roomId);
