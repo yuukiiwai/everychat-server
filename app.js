@@ -5,9 +5,18 @@ var io = require('socket.io')(http);
 const PORT = process.env.PORT || 7000;
 let roomId = '';
 
+app.set("view engine","ejs");
+
 app.get('/',function(req,res){
     roomId = req.query.c;
-    res.sendFile(__dirname + '/index.html');
+    data = {code:req.query.c};
+    console.log(roomId); //-> undefined or code
+    console.log(typeof(data));
+    if(data.code === undefined){
+        res.sendFile(__dirname + '/index.html');
+    }else{
+        res.render(__dirname + '/index.ejs',data);
+    }
 });
 
 http.listen(PORT,function(){

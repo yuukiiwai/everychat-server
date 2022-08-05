@@ -1,7 +1,7 @@
 <html>
     <script src="/socket.io/socket.io.js"></script>
-    <h3>roomid:<span id="roomid_span">
-    </span></h3>
+    <h3>roomid:<%- include("./code.ejs",code) %>
+    </h3>
     <input id="input_roomid" autocomplete="off"/><button onclick='roomid()'>send</button>
     <h3>comment</h3>
     <input id="input_msg" autocomplete="off"/><button onclick='send()'>send</button>
